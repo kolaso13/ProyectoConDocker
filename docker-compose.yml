@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  proxy:
+    image: nginx
+    ports:
+      - 8000:80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - ProAdri
+      
+  consola:
+    image: consoleapp1
+    build:
+      context: .
+      dockerfile: Dockerfile.con
+    networks:
+      - ProAdri
+
+  api:
+    image: webapitiempoproyecto
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    networks:
+        - ProAdri
+networks:
+  ProAdri:
